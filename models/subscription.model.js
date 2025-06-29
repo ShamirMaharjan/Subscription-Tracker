@@ -1,4 +1,4 @@
-
+import mongoose from "mongoose";
 
 const subscriptionSchema = mongoose.Schema({
     name: {
@@ -42,7 +42,7 @@ const subscriptionSchema = mongoose.Schema({
         type: Date,
         required: true,
         validate: {
-            validator: (value) => value <= new Date(),
+            validator: (value) => value => new Date(),
             message: "Start date must be in the past"
         }
     },
@@ -81,3 +81,7 @@ subscriptionSchema.pre('save', function (next) {
     }
     next();
 })
+
+const Subscription = mongoose.model('Subscription', subscriptionSchema);
+
+export default Subscription;
